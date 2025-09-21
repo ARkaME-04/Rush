@@ -89,36 +89,6 @@ static t_dict	split_pair(char *line)
 	return (entry);
 }
 
-/*lit un fichier et retourne le contenu en str*/
-static char	*read_dict_file(char *filename)
-{
-	int		fd;
-	int		bytes;
-	char	*buffer;
-
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		dict_error();
-		free(buffer);
-		return (NULL);
-	}
-	bytes = read(fd, buffer, BUFFER_SIZE);
-	if (bytes < 0)
-	{
-		dict_error();
-		free(buffer);
-		close(fd);
-		return (NULL);
-	}
-	buffer[bytes] = '\0';
-	close(fd);
-	return (buffer);
-}
-
 /*Parser le dico et return tableau + taille*/
 t_dict	*parse_dict(char *filename, int *size)
 {
